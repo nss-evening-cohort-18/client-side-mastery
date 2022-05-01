@@ -92,12 +92,59 @@ p {
 }
 ```
 
+## Starter Code
+
+The following `index.js` module can be copy pasta directly into the existing file and then closed. You won't need to make any changes to it.
+
+### Repairs Module
+
+Copy pasta the following code into the specified module to create a React component named **`Repairs`**.
+
+  > #### `src/components/Repairs.js`
+
+```js
+import "./Repairs.css"
+
+export const Repairs = () => {
+    return <>
+      <h1>Honey Rae's Repair Shop</h1>
+
+      <p>Your one-stop-shop to get all your electronics fixed</p>
+    </>
+}
+```
+
+### Index Module
+
+> #### `src/index.js`
+
+```js
+import { Repairs } from "./components/Repairs"
+import { createRoot } from 'react-dom/client'
+import './index.css'
+
+const container = document.getElementById('root')
+const root = createRoot(container)
+root.render(
+    <Repairs /> //  <---- This is where the Repairs component is rendered
+)
+
+```
+
 ## Starting Your React Application
 
 In your terminal, make sure you are in the top-level project directory, and not in the `public` or `src` sub-directory, and type the following command.
 
-It will take about 30 seconds to run all of your code. Unfortunately, because of all the changes you just made, the application won't start correctly. For now, just move on to chapters 2 and 3 and will start working again.
-
 ```sh
 npm start
 ```
+
+Your default browser will immediately start a new tab and the application will automatically load. You should see the title of the application and tagline appear. You can also open your **Components** dev tools panel and inspect the **`Repairs`** component.
+
+![](./images/honey-rae-initial-render.gif)
+
+## Next Steps
+
+Now that you have a bare-bones React application running, it's time to define and explore the data that you will be using for this application and how it's all related to each other.
+
+Navigate to the [Honey Rae's API](./chapters/REPAIR_API.md) chapter to continue...
