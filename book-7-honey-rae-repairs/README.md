@@ -12,7 +12,7 @@ For example, here's what the first few days should look like for you.
 
 ## Chapters
 
-| # | 🍯 💻 Honey Rae's Repairs | 🍭 🍬 Kandy Korner |
+| # | 🍯 💻 Honey Rae's Repairs <br/><sub>(_Guided Tour_)</sub> | 🍭 🍬 Kandy Korner |
 |--|--|--|
 | 1 | [Getting Started with React](./chapters/REACT_BASICS.md) |  |
 | 2 | [Repair API](./chapters/REPAIR_API.md) <br/> <sub style="font-size:0.85rem;">#api #json</sub>| [Kandy Korner API](./chapters/KANDY_API.md) |

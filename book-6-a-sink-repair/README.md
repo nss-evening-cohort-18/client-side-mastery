@@ -4,7 +4,7 @@ In this book, you will be introduced to the basics of asynchronous programming a
 
 ## Chapters
 
-| # | 🔧 💧 <br/> A Sink Repair <sub> <br/> (_Guided Tour_)</sub> | 🤡 <br/> Buttons the Clown |
+| # | 🔧 💧 <br/> A Sink Repair <br/><sub>(_Guided Tour_)</sub> | 🤡 <br/> Buttons the Clown |
 |--|--|--|
 | 1 | [Introduction to Fetch](./chapters/AS_FETCH_INTRO.md) <br/> <sub style="font-size:0.85rem;">#api #fetch</sub> |  |
 | 2 | [A Sink Repair Service](./chapters/AS_INTRO.md) <br/> <sub style="font-size:0.85rem;">#context</sub> | [Hire a Clown for Your Next Party](./chapters/BC_INTRO.md) |
