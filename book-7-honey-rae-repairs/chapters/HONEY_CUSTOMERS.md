@@ -12,31 +12,6 @@ Honey Rae's team needs to have an application that tracks who is working on whic
 
 The first step is to display all of the customers that have been helped. This will not only help with the current need of tracking their work, but will also allow Honey Rae to do marketing in the future to let people know if new services are being offered.
 
-## Starter Code
-
-The following `index.js` module can be copy pasta directly and then closed. You won't need to make any changes to it.
-
-### Index Module
-
-> #### `src/index.js`
-
-```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import { Repairs } from "./components/Repairs";
-import reportWebVitals from './reportWebVitals';
-
-ReactDOM.render(
-  <React.StrictMode>
-    <Repairs />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-reportWebVitals();
-```
-
 ### Repairs Module
 
 The **`Repairs.js`** module needs to remain open in your editor. While watching the video, you will need to make the appropriate changes to the code to make it work.
@@ -44,7 +19,7 @@ The **`Repairs.js`** module needs to remain open in your editor. While watching 
 > #### `src/components/Repairs.js`
 
 ```js
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 export const Repairs = () => {
     const [customers, assignCustomers] = useState([])

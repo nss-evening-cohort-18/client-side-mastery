@@ -2,22 +2,9 @@
 
 ## ERD
 
-Go to [dbdiagram](https://dbdiagram.io/d/), create a new diagram, and then copy pasta the following DBML into the definition panel. The visual ERD should appear as soon as the text is pasted.
+Go to [dbdiagram](https://dbdiagram.io/d/), create a new diagram, and then copy pasta the DBML below into the definition panel. The visual ERD should appear as soon as the text is pasted.
 
-### Relationships Explanation
-
-* There are two kinds of users in this application - employees and customers - but both are **Users**.
-* **Customers**, who are **Users**, have two additional properties of `address` and `phoneNumber`.
-* **Employees**, who are **Users**, have two additional properties of `specialty` and `rate`.
-* When a new employee account is registered, two things must happen
-    * A new object in the **Users** table must be created with the `isStaff` property set as `true`.
-    * A new object in the **Employees** table must be created with a foreign key (`userId`) that stores the the value of the primary key of the user object created in the previous step. Tip: chained fetch calls will be needed.
-* When a new customer account is registered, two things must happen
-    * A new object in the **Users** table must be created with the `isStaff` property set as `false`.
-    * A new object in the **Customers** table must be created with a foreign key (`userId`) that stores the value of the primary key of the user object created in the previous step. Again, chained fetch calls will be needed.
-* Customers can create service tickets that go in the queue. No employee is assigned on creation. Employees assign someone at a future date.
-* When an employee is assigned to a ticket, a new object in the **EmployeeTickets** table is created for that relationship.
-
+![ERD for the honey rae API](./images/honey-rae-ERD.png)
 
 <details>
     <summary>Expand to get the DBML for Honey Rae's</summary>
@@ -61,7 +48,19 @@ Table EmployeeTickets [headercolor: #f39c12] {
 
 </details>
 
-![ERD for the honey rae API](./images/honey-rae-ERD.png)
+### Relationships Explanation
+
+* There are two kinds of users in this application - employees and customers - but both are **Users**.
+* **Customers**, who are **Users**, have two additional properties of `address` and `phoneNumber`.
+* **Employees**, who are **Users**, have two additional properties of `specialty` and `rate`.
+* When a new employee account is registered, two things must happen
+    * A new object in the **Users** table must be created with the `isStaff` property set as `true`.
+    * A new object in the **Employees** table must be created with a foreign key (`userId`) that stores the the value of the primary key of the user object created in the previous step. Tip: chained fetch calls will be needed.
+* When a new customer account is registered, two things must happen
+    * A new object in the **Users** table must be created with the `isStaff` property set as `false`.
+    * A new object in the **Customers** table must be created with a foreign key (`userId`) that stores the value of the primary key of the user object created in the previous step. Again, chained fetch calls will be needed.
+* Customers can create service tickets that go in the queue. No employee is assigned on creation. Employees assign someone at a future date.
+* When an employee is assigned to a ticket, a new object in the **EmployeeTickets** table is created for that relationship.
 
 ## JSON Data
 

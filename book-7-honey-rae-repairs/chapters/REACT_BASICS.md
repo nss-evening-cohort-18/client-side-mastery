@@ -98,8 +98,6 @@ p {
 
 ## Starter Code
 
-The following `index.js` module can be copy pasta directly into the existing file and then closed. You won't need to make any changes to it.
-
 ### Repairs Module
 
 Copy pasta the following code into the specified module to create a React component named **`Repairs`**.
@@ -119,6 +117,8 @@ export const Repairs = () => {
 ```
 
 ### Index Module
+
+The following `index.js` module can be copy pasta directly into the existing file and then closed. You won't need to make any changes to it.
 
 > #### `src/index.js`
 

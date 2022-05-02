@@ -1,45 +1,171 @@
 #!/bin/bash
 set -u
 
-mkdir -p ./src/components/auth && cd $_
+mkdir -p ./src/components
 
-echo 'import React, { useRef, useState } from "react"
+echo 'import { Route, Redirect } from "react-router-dom"
+import { ApplicationViews } from "./ApplicationViews"
+import { NavBar } from "./nav/NavBar"
+import { Login } from "./auth/Login"
+import { Register } from "./auth/Register"
+import "./Repairs.css"
+
+export const Repairs = () => (
+  <>
+    <Route
+      render={() => {
+        if (localStorage.getItem("honey_customer")) {
+          return (
+            <>
+              <NavBar />
+              <ApplicationViews />
+            </>
+          )
+        } else {
+          return <Redirect to="/login" />
+        }
+      }}
+    />
+
+    <Route path="/login">
+      <Login />
+    </Route>
+    <Route path="/register">
+      <Register />
+    </Route>
+  </>
+)
+' > ./src/components/Repairs.js
+
+echo '/* Import the google web fonts you want to use */
+@import url("https://fonts.googleapis.com/css?family=Comfortaa|Patua+One");
+
+/*Typography
+--------------------------------------------------------------*/
+body,
+button,
+input,
+select,
+textarea {
+  color: #404040;
+  font-family: "Comfortaa", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+body {
+    padding: 0 3rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Patua One", serif;
+  letter-spacing: 2px;
+}
+
+p {
+  margin-bottom: 1.5em;
+}
+' > ./src/components/Repairs.css
+
+mkdir -p ./src/components/nav
+echo 'import React from "react"
+import { Link } from "react-router-dom"
+import "./NavBar.css"
+
+export const NavBar = () => {
+    return (
+        <ul className="navbar">
+            <li className="navbar__item active">
+                <Link className="navbar__link" to="/tickets">Tickets</Link>
+            </li>
+        </ul>
+    )
+}
+' > ./src/components/nav/NavBar.js
+
+echo '.navbar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: left;
+}
+
+.navbar__item {
+    flex-basis: 20%;
+    list-style-type: none;
+}
+' > ./src/components/nav/NavBar.css
+
+
+echo 'import { Route } from "react-router-dom"
+
+export const ApplicationViews = () => {
+    return (
+        <>
+            <Route path="/">
+                <>
+                    <h1>Honey Rae Repair Shop</h1>
+
+                    <p>Your one-stop-shop to get all your electronics fixed</p>
+                </>
+            </Route>
+        </>
+    )
+}' > ./src/components/ApplicationViews.js
+
+echo '' > ./src/components/Repairs.js
+echo '' > ./src/components/Repairs.js
+echo '' > ./src/components/Repairs.js
+echo '' > ./src/components/Repairs.js
+echo '' > ./src/components/Repairs.js
+echo '' > ./src/components/Repairs.js
+echo '' > ./src/components/Repairs.js
+echo '' > ./src/components/Repairs.js
+echo '' > ./src/components/Repairs.js
+
+
+
+mkdir -p ./src/components/auth
+
+echo 'import { useRef, useState } from "react"
 import { useHistory } from "react-router-dom"
 import "./Login.css"
 
 export const Register = (props) => {
-    const [customer, setCustomer] = useState({})
-    const conflictDialog = useRef()
-
+    const [customer, setCustomer] = useState({
+        email: "",
+        fullName: "",
+        isStaff: false
+    })
     const history = useHistory()
 
-    const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/customers?email=${customer.email}`)
+    const registerNewUser = () => {
+        fetch("http://localhost:8088/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(customer)
+        })
             .then(res => res.json())
-            .then(user => !!user.length)
+            .then(createdUser => {
+                if (createdUser.hasOwnProperty("id")) {
+                    localStorage.setItem("honey_customer", createdUser.id)
+                    history.push("/")
+                }
+            })
     }
+
     const handleRegister = (e) => {
         e.preventDefault()
-        existingUserCheck()
-            .then((userExists) => {
-                if (!userExists) {
-                    fetch("http://localhost:8088/customers", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(customer)
-                    })
-                        .then(res => res.json())
-                        .then(createdUser => {
-                            if (createdUser.hasOwnProperty("id")) {
-                                localStorage.setItem("honey_customer", createdUser.id)
-                                history.push("/")
-                            }
-                        })
+        return fetch(`http://localhost:8088/users?email=${customer.email}`)
+            .then(res => res.json())
+            .then(response => {
+                if (response.length === 0) {
+                    window.alert("Account with that email address already exists")
                 }
                 else {
-                    conflictDialog.current.showModal()
+                    // Good email, create user
+                    registerNewUser()
                 }
             })
     }
@@ -53,26 +179,28 @@ export const Register = (props) => {
 
     return (
         <main style={{ textAlign: "center" }}>
-            <dialog className="dialog dialog--password" ref={conflictDialog}>
-                <div>Account with that email address already exists</div>
-                <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
-            </dialog>
-
             <form className="form--login" onSubmit={handleRegister}>
                 <h1 className="h3 mb-3 font-weight-normal">Please Register for Honey Rae Repairs</h1>
                 <fieldset>
-                    <label htmlFor="name"> Full Name </label>
+                    <label htmlFor="fullName"> Full Name </label>
                     <input onChange={updateCustomer}
-                           type="text" id="name" className="form-control"
+                           type="text" id="fullName" className="form-control"
                            placeholder="Enter your name" required autoFocus />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="address"> Address </label>
-                    <input onChange={updateCustomer} type="text" id="address" className="form-control" placeholder="Street address" required />
+                    <label htmlFor="email"> Email address </label>
+                    <input onChange={updateCustomer}
+                        type="email" id="email" className="form-control"
+                        placeholder="Email address" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="email"> Email address </label>
-                    <input onChange={updateCustomer} type="email" id="email" className="form-control" placeholder="Email address" required />
+                    <label htmlFor="email"> I am an employee </label>
+                    <input onChange={(evt) => {
+                        const copy = {...customer}
+                        copy.isStaff = evt.target.checked
+                        setCustomer(copy)
+                    }}
+                        type="checkbox" id="isStaff" className="form-control" />
                 </fieldset>
                 <fieldset>
                     <button type="submit"> Register </button>
@@ -81,7 +209,7 @@ export const Register = (props) => {
         </main>
     )
 }
-' > ./Register.js
+' > ./src/components/auth/Register.js
 
 echo 'import React, { useRef, useState } from "react"
 import { Link } from "react-router-dom";
@@ -144,7 +272,7 @@ export const Login = () => {
         </main>
     )
 }
-' > ./Login.js
+' > ./src/components/auth/Login.js
 
 echo '.h1, h1 {
     font-size: 2.5rem;
@@ -212,4 +340,4 @@ fieldset {
     min-width: 15rem;
     min-height: 5rem;
 }
-' > ./Login.css
+' > ./src/components/auth/Login.css

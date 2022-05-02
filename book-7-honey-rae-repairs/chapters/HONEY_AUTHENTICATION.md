@@ -22,13 +22,12 @@ What determines if a user has authenticated? It's the `honey_customer` key that 
 Open your **`Repairs`** component and place the following code in it.
 
 ```js
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import { ApplicationViews } from "./ApplicationViews";
-import { NavBar } from "./nav/NavBar";
-import { Login } from "./auth/Login";
-import { Register } from "./auth/Register";
-import "./Repairs.css";
+import { Route, Redirect } from "react-router-dom"
+import { ApplicationViews } from "./ApplicationViews"
+import { NavBar } from "./nav/NavBar"
+import { Login } from "./auth/Login"
+import { Register } from "./auth/Register"
+import "./Repairs.css"
 
 export const Repairs = () => (
   <>
@@ -40,9 +39,9 @@ export const Repairs = () => (
               <NavBar />
               <ApplicationViews />
             </>
-          );
+          )
         } else {
-          return <Redirect to="/login" />;
+          return <Redirect to="/login" />
         }
       }}
     />
@@ -54,7 +53,7 @@ export const Repairs = () => (
       <Register />
     </Route>
   </>
-);
+)
 ```
 
 ## Installing Authentication Components
